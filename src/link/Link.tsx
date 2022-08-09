@@ -7,7 +7,17 @@ export interface LinkProps extends TdLinkProps, React.HTMLAttributes<HTMLAnchorE
 
 const Link = React.forwardRef(
   (
-    { children, className, underline, prefixIcon, suffixIcon, theme, disabled, ...props }: LinkProps,
+    {
+      children,
+      className,
+      underline,
+      prefixIcon,
+      suffixIcon,
+      theme,
+      disabled,
+      hover = 'underline',
+      ...props
+    }: LinkProps,
     ref: React.RefObject<HTMLAnchorElement>,
   ) => {
     const { classPrefix } = useConfig();
@@ -15,8 +25,8 @@ const Link = React.forwardRef(
     return (
       <a
         ref={ref}
-        className={classNames(className, [`${classPrefix}-link`], {
-          [`${classPrefix}-underline`]: underline,
+        className={classNames(className, [`${classPrefix}-link`, `${classPrefix}-link--hover-${hover}`], {
+          [`${classPrefix}-is-underline`]: underline,
           [`${classPrefix}-link--theme-success`]: theme === 'success',
           [`${classPrefix}-link--theme-danger`]: theme === 'danger',
           [`${classPrefix}-link--theme-warning`]: theme === 'warning',
